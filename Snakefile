@@ -7,6 +7,8 @@ S3 = S3RemoteProvider(
 )
 prefix = config["prefix"]
 filename = config["filename"]
+additional_data=config["additional_data"]
+annotation=config["annotation"]
 
 rule get_pset:
     input:
@@ -66,10 +68,10 @@ rule get_preprocessed_data:
         S3.remote(prefix + "preprocessed_data/raw_drug.csv")
     shell:
         """
-        wget -O {prefix}preprocessed_data/cell.csv https://sandbox.zenodo.org/record/1061897/files/cell.csv?download=1
-        wget -O {prefix}preprocessed_data/cell_annotation_all.csv https://sandbox.zenodo.org/record/1061897/files/cell_annotation_all.csv?download=1
-        wget -O {prefix}preprocessed_data/final_eset.Rda https://sandbox.zenodo.org/record/1061897/files/final_eset.Rda?download=1
-        wget -O {prefix}preprocessed_data/raw_drug.csv https://sandbox.zenodo.org/record/1061897/files/raw_drug.csv?download=1
+        wget -O {prefix}preprocessed_data/cell.csv {additional_data}data/cell.csv
+        wget -O {prefix}preprocessed_data/cell_annotation_all.csv {additional_data}data/cell_annotation_all.csv
+        wget -O {prefix}preprocessed_data/final_eset.Rda {additional_data}data/final_eset.Rda
+        wget -O {prefix}preprocessed_data/raw_drug.csv {additional_data}data/raw_drug.csv
         """
 
 rule get_annotation:
@@ -77,5 +79,5 @@ rule get_annotation:
         S3.remote(prefix + "annotation/drugs_with_ids.csv")
     shell:
         """
-        wget -O {prefix}annotation/drugs_with_ids.csv https://github.com/BHKLAB-Pachyderm/Annotations/raw/master/drugs_with_ids.csv
+        wget -O {prefix}annotation/drugs_with_ids.csv {annotation}drugs_with_ids.csv
         """
