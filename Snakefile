@@ -12,10 +12,14 @@ annotations_repo = config["annotations_repo"]
 rule get_pset:
     input:
         S3.remote("bhklab_orcestra/annotation/drugs_with_ids.csv"),
-        S3.remote(prefix + "breast/cell.csv"),
-        S3.remote(prefix + "breast/cell_annotation_all.csv"),
-        S3.remote(prefix + "breast/final_eset.Rda"),
-        S3.remote(prefix + "breast/raw_drug.csv"),
+        # S3.remote(prefix + "breast/cell.csv"),
+        # S3.remote(prefix + "breast/cell_annotation_all.csv"),
+        # S3.remote(prefix + "breast/final_eset.Rda"),
+        # S3.remote(prefix + "breast/raw_drug.csv"),
+        "data/cell.csv",
+        "data/cell_annotation_all.csv",
+        "data/final_eset.Rda",
+        "data/raw_drug.csv",
         S3.remote(prefix + "drug_sensitivity/info.rds"),
         S3.remote(prefix + "drug_sensitivity/dose_viability.rds"),
         S3.remote(prefix + "drug_sensitivity/raw.rds"),
