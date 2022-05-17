@@ -7,7 +7,7 @@ S3 = S3RemoteProvider(
 )
 prefix = config["prefix"]
 filename = config["filename"]
-additional_data=config["additional_data"]
+preprocessed=config["preprocessed"]
 annotation=config["annotation"]
 
 rule get_pset:
@@ -68,10 +68,10 @@ rule get_preprocessed_data:
         S3.remote(prefix + "preprocessed_data/raw_drug.csv")
     shell:
         """
-        wget -O {prefix}preprocessed_data/cell.csv {additional_data}data/cell.csv
-        wget -O {prefix}preprocessed_data/cell_annotation_all.csv {additional_data}data/cell_annotation_all.csv
-        wget -O {prefix}preprocessed_data/final_eset.Rda {additional_data}data/final_eset.Rda
-        wget -O {prefix}preprocessed_data/raw_drug.csv {additional_data}data/raw_drug.csv
+        wget -O {prefix}preprocessed_data/cell.csv {preprocessed}cell.csv
+        wget -O {prefix}preprocessed_data/cell_annotation_all.csv {preprocessed}cell_annotation_all.csv
+        wget -O {prefix}preprocessed_data/final_eset.Rda {preprocessed}final_eset.Rda
+        wget -O {prefix}preprocessed_data/raw_drug.csv {preprocessed}raw_drug.csv
         """
 
 rule get_annotation:
