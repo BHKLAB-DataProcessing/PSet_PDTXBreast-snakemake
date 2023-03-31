@@ -7,7 +7,7 @@ S3 = S3RemoteProvider(
 )
 prefix = config["prefix"]
 filename = config["filename"]
-preprocessed = 'https://raw.githubusercontent.com/BHKLAB-DataProcessing/PSet_PDTX-data/main/'
+preprocessed = 'https://raw.githubusercontent.com/BHKLAB-DataProcessing/PSet_PDTXBreast-data/main/'
 is_filtered = config["filtered"]
 filtered = 'filtered' if config["filtered"] is not None and config["filtered"] == 'filtered' else ''
 
