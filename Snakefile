@@ -7,7 +7,9 @@ S3 = S3RemoteProvider(
 )
 prefix = config["prefix"]
 filename = config["filename"]
-preprocessed = 'https://raw.githubusercontent.com/BHKLAB-DataProcessing/pdtx-data/main/'
+preprocessed = 'https://raw.githubusercontent.com/BHKLAB-DataProcessing/PSet_PDTX-data/main/'
+is_filtered = config["filtered"]
+filtered = 'filtered' if config["filtered"] is not None and config["filtered"] == 'filtered' else ''
 
 rule get_pset:
     input:
@@ -29,7 +31,8 @@ rule get_pset:
         {prefix}drug_sensitivity/ \
         {prefix}annotation/ \
         {prefix} \
-        {filename}
+        {filename} \
+        {filtered}
         """
 
 rule normalize_and_compute_sens:
