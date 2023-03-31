@@ -1,14 +1,13 @@
 from snakemake.remote.S3 import RemoteProvider as S3RemoteProvider
 S3 = S3RemoteProvider(
-    access_key_id=config["key"], 
+    access_key_id=config["key"],
     secret_access_key=config["secret"],
     host=config["host"],
     stay_on_remote=False
 )
 prefix = config["prefix"]
 filename = config["filename"]
-preprocessed=config["preprocessed"]
-annotation=config["annotation"]
+preprocessed = 'https://raw.githubusercontent.com/BHKLAB-DataProcessing/pdtx-data/main/'
 
 rule get_pset:
     input:
@@ -79,5 +78,6 @@ rule get_annotation:
         S3.remote(prefix + "annotation/drugs_with_ids.csv")
     shell:
         """
-        wget -O {prefix}annotation/drugs_with_ids.csv {annotation}drugs_with_ids.csv
+        wget https://raw.githubusercontent.com/BHKLAB-DataProcessing/Annotations/master/drugs_with_ids.csv \
+            -O {prefix}annotation/drugs_with_ids.csv 
         """
